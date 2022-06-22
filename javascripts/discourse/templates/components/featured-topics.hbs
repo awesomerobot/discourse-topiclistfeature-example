@@ -1,0 +1,78 @@
+{{plugin-outlet name="above-custom-category-columns" tagName=""}}
+
+{{#if shouldShow}}
+
+  {{#if specialDescription}}
+    {{! special case for ambassador category}}
+    <section class="category-heading special-category-heading clearfix">
+      <div
+        class="category-logo aspect-image"
+        style="--aspect-ratio: 0.9950248756218906;"
+      >
+        <img
+          src="{{specialDescription.uploaded_logo.url}}"
+          alt=""
+          width="200"
+          height="201"
+        />
+      </div>
+
+      <p>{{html-safe specialDescription.description_text}}</p>
+
+    </section>
+  {{/if}}
+
+  <div class="custom-category-columns">
+    {{#if topicList1}}
+      <div class="custom-category-column">
+        <div class="header-wrapper">
+          <h2><a
+              href="{{if
+                filteredSetting.topic_list_tag_1_link
+                filteredSetting.topic_list_tag_1_link
+              }}"
+            >{{filteredSetting.topic_list_tag_1_title}}</a></h2>
+        </div>
+        {{topic-list topics=topicList1 showPosters=false}}
+      </div>
+    {{/if}}
+    {{#if topicList2}}
+      <div class="custom-category-column">
+        <div class="header-wrapper">
+          <h2><a
+              href="{{if
+                filteredSetting.topic_list_tag_2_link
+                filteredSetting.topic_list_tag_2_link
+              }}"
+            >{{filteredSetting.topic_list_tag_2_title}}</a></h2>
+        </div>
+        {{topic-list topics=topicList2 showPosters=false}}
+      </div>
+    {{/if}}
+
+    {{#if topicList3}}
+      <div class="custom-category-column">
+        <div class="header-wrapper">
+          <h2><a
+              href="{{if
+                filteredSetting.topic_list_tag_3_link
+                filteredSetting.topic_list_tag_3_link
+              }}"
+            >{{filteredSetting.topic_list_tag_3_title}}</a></h2>
+        </div>
+        {{topic-list topics=topicList3 showPosters=false}}
+      </div>
+    {{/if}}
+  </div>
+
+  {{#if filteredSetting.banner_text}}
+    <div class="custom-category-banner-below">
+      <h3>{{filteredSetting.banner_text}}</h3>
+      <a
+        href="{{filteredSetting.banner_link}}"
+        class="btn btn-primary btn-text"
+      >{{filteredSetting.button_text}}</a>
+    </div>
+  {{/if}}
+
+{{/if}}
