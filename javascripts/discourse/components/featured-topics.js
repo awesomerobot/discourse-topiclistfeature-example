@@ -7,11 +7,6 @@ import { inject as service } from "@ember/service";
 export default Component.extend({
   router: service(),
   tagName: "",
-  category: computed("this.router", function () {
-    return this.router.currentRoute
-      ? this.router.currentRoute.attributes.category
-      : null;
-  }),
 
   didInsertElement() {
     this._super(...arguments);
@@ -45,17 +40,22 @@ export default Component.extend({
           });
       };
 
-      if (this.filteredSetting) {
-        let tag1 = this.filteredSetting.topic_list_tag_1;
-        let tag2 = this.filteredSetting.topic_list_tag_2;
-        let tag3 = this.filteredSetting.topic_list_tag_3;
+      let tag1 = this.settings.topic_list_tag_1;
+      let tag2 = this.settings.topic_list_tag_2;
+      let tag3 = this.settings.topic_list_tag_3;
 
+      if (tag1) {
         this.set("tag1", tag1);
-        this.set("tag2", tag2);
-        this.set("tag3", tag3);
-
         getFeaturedTopics(tag1, "topicList1");
+      }
+
+      if (tag2) {
+        this.set("tag2", tag2);
         getFeaturedTopics(tag2, "topicList2");
+      }
+
+      if (tag3) {
+        this.set("tag3", tag3);
         getFeaturedTopics(tag3, "topicList3");
       }
 
@@ -64,22 +64,10 @@ export default Component.extend({
     }
   },
 
-  @discourseComputed("router.currentRoute")
-  filteredSetting(router) {
-    const parsedSetting = JSON.parse(settings.category_topic_lists);
-    let filteredSetting;
-
-    if (router?.attributes?.category) {
-      filteredSetting = parsedSetting.filter(
-        (entry) => parseInt(entry.category) === router.attributes.category.id
-      )[0];
-    }
-    return filteredSetting;
-  },
 
   @observes("shouldShow")
   _updateBodyClasses() {
-    if (this.shouldShow && this.category) {
+    if (this.shouldShow) {
       document.body.classList.add("custom-topic-lists");
     } else {
       document.body.classList.remove("custom-topic-lists");
