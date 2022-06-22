@@ -1,8 +1,26 @@
 topic_list_tag_1:
   default: ""
 
+topic_list_tag_1_link:
+  default: ""
+
+topic_list_tag_1_title:
+  default: ""
+
 topic_list_tag_2:
   default: ""
 
+topic_list_tag_2_link:
+  default: ""
+
+topic_list_tag_2_title:
+  default: ""
+
 topic_list_tag_3:
+  default: ""
+
+topic_list_tag_3_link:
+  default: ""
+
+topic_list_tag_3_title:
   default: ""

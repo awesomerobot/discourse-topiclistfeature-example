@@ -1,8 +1,8 @@
 import Component from "@ember/component";
-import { computed } from "@ember/object";
 import { inject as controller } from "@ember/controller";
 import discourseComputed, { observes } from "discourse-common/utils/decorators";
 import { inject as service } from "@ember/service";
+import { defaultHomepage } from "discourse/lib/utilities";
 
 export default Component.extend({
   router: service(),
@@ -40,9 +40,9 @@ export default Component.extend({
           });
       };
 
-      let tag1 = this.settings.topic_list_tag_1;
-      let tag2 = this.settings.topic_list_tag_2;
-      let tag3 = this.settings.topic_list_tag_3;
+      let tag1 = settings.topic_list_tag_1;
+      let tag2 = settings.topic_list_tag_2;
+      let tag3 = settings.topic_list_tag_3;
 
       if (tag1) {
         this.set("tag1", tag1);
@@ -77,6 +77,6 @@ export default Component.extend({
 
   @discourseComputed("router.currentRouteName")
   shouldShow(currentRouteName) {
-    return this.filteredSetting && currentRouteName === "discovery.category";
+    return currentRouteName == `discovery.${defaultHomepage()}`;
   },
 });
